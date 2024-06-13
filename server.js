@@ -33,6 +33,8 @@ app.use('/tip', require('./router/tip.router'))
 app.use(errorHandler)
 
 
+createMinimum()
+createAdmin()
 
 const start = async () => {
     try {
