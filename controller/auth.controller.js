@@ -65,7 +65,6 @@ exports.login = asyncHandler(async (req, res, next) => {
 exports.userOpen = asyncHandler(async (req, res, next) => {
     const user = await Master.findOne({
         where: {id: req.user.id},
-        attributes: ["username", "passwordInfo", "adminStatus"]
     })
     if(!user){
         return next(new ErrorResponse("Server xatolik", 403))
@@ -74,7 +73,6 @@ exports.userOpen = asyncHandler(async (req, res, next) => {
     if(user.adminStatus){
         const users = await Master.findAll({
             where: {adminStatus: false},
-            attributes: ["username", "passwordInfo"],
             order: [["createdAt", "ASC"]]
         })
 
