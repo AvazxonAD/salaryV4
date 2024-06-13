@@ -16,8 +16,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 app.use(cors())
 
-createMinimum()
-createAdmin()
 
 const PORT = process.env.PORT || 3000
 
@@ -34,6 +32,8 @@ app.use('/tip', require('./router/tip.router'))
 
 app.use(errorHandler)
 
+
+
 const start = async () => {
     try {
         await db.sequelize.sync() 
@@ -48,4 +48,5 @@ const start = async () => {
 }
 
 start()
+
 
