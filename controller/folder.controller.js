@@ -251,10 +251,10 @@ exports.getBack = asyncHandler(async (req, res, next) => {
 // for folder path 
 exports.forPath = asyncHandler(async (req, res, next) => {
     let folders = []
+    let file = false
    
     if(req.query.who === "user"){
         const parentMaster = await Master.findByPk(req.params.id)
-        console.log(parentMaster.id)
     
         folders = await Folder.findAll({
             where: {masterId: parentMaster.id},
@@ -268,7 +268,13 @@ exports.forPath = asyncHandler(async (req, res, next) => {
             where: {folderId: parentFolder.id},
             attributes: ["name", "id"]
         })
+        
+        const files = await File.findAll({where: {folderId: parentFolder.id}})
+        
+        if(files.length >= 1){
+            file = true
+        }
     }
     
-    return res.status(200).json({success: true, data: folders})
+    return res.status(200).json({success: true, data: folders, file})
 })

@@ -22,6 +22,7 @@ exports.createFile = asyncHandler(async (req, res, next) => {
     const {files} = req.body
     
     for(let file of files){
+        console.log(file)
         if(!file.selectPosition  || !file.selectPercent || !file.selectSalary ||  !file.selectCoctav || !file.selectTip   || !file.selectRegion  || !file.selectStavka ){
             return next(new ErrorResponse("Sorovlar bosh qolmasligi kerak", 402))
         }

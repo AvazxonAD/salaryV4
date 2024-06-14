@@ -32,14 +32,12 @@ app.use('/tip', require('./router/tip.router'))
 
 app.use(errorHandler)
 
-
-createMinimum()
-createAdmin()
-
 const start = async () => {
     try {
         await db.sequelize.sync() 
         
+        await createMinimum()
+        await createAdmin()
     app.listen(PORT, () => {
         console.log(`Server run on port : ${PORT}`.blue)
     })
